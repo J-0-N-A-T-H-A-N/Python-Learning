@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Forms</title>
+</head>
+<body>
+    <h1>Hey, looks like it's working!</h1>
+
+    <!-- Form -->
+    <!-- Dynamically define endpoint to go to def receive_data() in main.py-->
+    <form action="{{ url_for('receive_data') }}" method="post">
+        <label>Name: </label>
+        <input type="text" name="username" placeholder="Name">
+
+        <label>Password: </label>
+        <input type="password" name="password" placeholder="Password">
+
+        <button type="submit">OK</button>
+    </form>
+
+</body>
+</html>

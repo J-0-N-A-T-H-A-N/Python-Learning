@@ -1,0 +1,164 @@
+/* HTML Tags */
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+/* Headings */
+
+.big-heading{
+    font-size: 3.5rem;
+    line-height: 1.5;
+    font-weight: 900;
+}
+
+.med-heading{
+    font-size: 2.5rem;
+    line-height: 1.5;
+    font-weight: 900;
+}
+
+.small-heading{
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-weight: 900;
+}
+
+/* Containers */
+
+.container-fluid{
+    padding: 7% 15%;
+}
+
+#title .container-fluid{
+    padding: 3% 15% 7%;
+}
+
+#title{
+    position: relative;
+    text-align: left;
+}
+
+/* Sections */
+
+.coloured-section{
+    background-color: #ff4c68;
+    color: #ffffff;
+}
+
+.white-section{
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Navigation Bar */
+.navbar{
+    padding: 0 0 2.5rem;
+}
+
+.navbar-brand{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 400;
+}
+
+/* Large phone image */
+.rotated{
+    transform: rotate(20deg);
+    width: 20%;
+    position: absolute;
+    z-index: 0;
+    right: 25%
+}
+
+.nav-item{
+    padding: 0 18px;
+}
+
+.nav-link{
+    font-size: 1.2rem;
+    font-weight: 100;
+}
+
+/* Download buttons */
+.download-btn{
+    margin: 5% 3% 5% 0%
+}
+
+#features i{
+    color: #ef8172;
+    margin-bottom: 1rem;
+}
+
+#features i:hover{
+    color: #ff4c68;
+}
+
+#features p{
+    font-size: 1rem;
+    font-weight: regular;
+    color: #8f8f8f;
+}
+
+#features{
+    position: relative;
+}
+
+/* Testimonial Section */
+
+
+.testimonial-img{
+    width: 10%;
+    border-radius: 100%;
+    margin: 20px;
+}
+
+#testimonials {
+    background-color: #ef8172;
+}
+
+#press{
+    background-color: #ef8172;
+    padding-bottom: 3%;
+}
+
+#press img{
+    width: 15%;
+    margin: 20px 20px 20px 50px;
+}
+
+.card-title{
+    white-space: nowrap;
+    font-size: 2rem;
+}
+
+.pricing-col{
+    margin: 3% 0 2% 0;
+}
+
+#footer{
+    padding: 0% 15%;
+}
+
+#footer i{
+    margin: 0 10px 15px;
+    color: black;
+}
+
+
+@media (max-width: 1030px) {
+
+    .rotated{
+        position: static;
+        transform: rotate(0deg);
+        width: 60%;
+    }
+
+    h1{
+        text-align: center;
+    }
+    #title{
+        text-align: center;
+    }
+}

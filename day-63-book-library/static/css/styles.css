@@ -1,0 +1,19 @@
+.btn{
+    border: 1px solid;
+    margin: 10px 0 10px;
+}
+.form{
+    margin: 2%10% 0% 10%;
+}
+.title_to_edit{
+    text-decoration: underline;
+}
+.edit-btn{
+    height: 5px;
+}
+.icon{
+    color: #92A9BD;
+}
+.sort-options{
+    margin: 0 0 0 75%
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My website</title>
+</head>
+<body>
+    <h1>Hello World, how's it going?</h1>
+    <h2>{{ 5 * 50 }}</h2>
+    <h3>Random number: {{ num }} </h3>              # num comes from server.py file
+
+    <p>
+        <a href="{{ url_for('get_blog', num=3) }}">Blogs</a>
+    </p>
+
+<footer>
+    <p>Copyright {{ year }}. Built by Jonathan at home</p>
+</footer>
+</body>
+</html>

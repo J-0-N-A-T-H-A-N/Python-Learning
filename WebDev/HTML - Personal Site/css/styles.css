@@ -1,0 +1,41 @@
+
+/* **************************TAG Selectors************************** */
+
+body {
+    background-color: #F2EDD7;
+    padding-right: 100px;
+    padding-left: 100px;
+    }
+
+hr {
+    border-color: #5F939A;
+    border-style: none;
+    border-top-style: dotted;
+    border-width: 5px;
+    width: 5%;
+}
+h1 {
+    color: #5F939A;
+}
+h3 {
+    color: #5F939A;
+}
+img {
+    height: 150px;
+}
+a {
+    color: #A0937D;
+}
+a:hover {
+    color: #5F939A;
+}
+
+/* **************************CLASS Selectors************************** */
+.header {
+    height: 275px;
+}
+
+/* **************************ID Selectors************************** */
+#header{
+
+}
