@@ -44,7 +44,7 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.xlabel("Date", fontsize=14)
 plt.ylabel("Number of Post", fontsize=14)
-plt.ylim(0,35000)
+plt.ylim(0, 35000)
 #
 # java_data = pivoted_df["java"]
 # python_data = pivoted_df["python"]
