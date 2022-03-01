@@ -10,9 +10,9 @@ df_apps = pd.read_csv("apps.csv")
 # print(df_apps.sample(n=5))
 #
 
-print(df_apps.columns)
+# print(df_apps.columns)
 df_apps.drop(axis=1, inplace=True, columns=["Last_Updated", "Android_Ver"])
-print(df_apps.columns)
+# print(df_apps.columns)
 
 # Print total number of  Nan Values
 # print(f"Total Number of NaN Values: {df_apps.isna().values.sum()}")
@@ -25,10 +25,10 @@ df_apps_clean = df_apps.dropna()
 #
 # print(df_apps_clean[df_apps_clean["App"] == "Instagram"])
 # print(f"Duplicates: {df_apps_clean[df_apps_clean.duplicated()]}")
-print(df_apps_clean.shape)
+# print(df_apps_clean.shape)
 # Clean out duplicates, giving columns to use for comparison - if these match, considered duplicate.
 df_apps_clean = df_apps_clean.drop_duplicates(subset=["App", "Type", "Price"])
-print(df_apps_clean.shape)
+# print(df_apps_clean.shape)
 
 # print(df_apps_clean[df_apps_clean["App"] == "Instagram"])
 # # Print all the unique entries in the Category Column
@@ -78,17 +78,17 @@ df_apps_clean["Price"] = pd.to_numeric(df_apps_clean["Price"])
 
 # print(df_apps_clean[["App", "Price"]].sort_values(by="Price", ascending=False).head(20))
 
-print(df_apps_clean[["App", "Price", "Installs"]][df_apps_clean["Price"] > 250].sort_values(by="Price", ascending=False))
-print(df_apps_clean.shape)
+# print(df_apps_clean[["App", "Price", "Installs"]][df_apps_clean["Price"] > 250].sort_values(by="Price", ascending=False))
+# print(df_apps_clean.shape)
 # Drop rows where price > 250
 df_apps_clean.drop(df_apps_clean[df_apps_clean["Price"] > 250].index, inplace=True)
-print(df_apps_clean.shape)
+# print(df_apps_clean.shape)
 
 est_revenue = df_apps_clean["Installs"] * df_apps_clean["Price"]
 df_apps_clean.insert(10, "Revenue_Estimate", est_revenue)
 
-print(df_apps_clean.sort_values("Revenue_Estimate", ascending=False).head(10))
-print(df_apps_clean.groupby(by="Category").sum().sort_values(by="Installs", ascending=False))
+# print(df_apps_clean.sort_values("Revenue_Estimate", ascending=False).head(10))
+# print(df_apps_clean.groupby(by="Category").sum().sort_values(by="Installs", ascending=False))
 
 # Apps per category - sliced for top-20
 apps_per_category = df_apps_clean["Category"].value_counts()[:20]
@@ -102,19 +102,71 @@ category_install_count = df_apps_clean.groupby(by="Category").agg({"Installs": p
 # print(category_install_count)
 
 df_merged = pd.merge(category_app_count, category_install_count, on="Category")
-print(df_merged)
+# print(df_merged)
 
-scatter = px.scatter(df_merged,
-                     x="App",
-                     y="Installs",
-                     color='Installs',
-                     size='App',
-                     title="Category Concentration",
-                     hover_name=df_merged.index)
-scatter.update_layout(xaxis_title="Number of Apps (Lower=More Concentrated)",
-                      yaxis_title="Installs",
-                      yaxis=dict(type='log'))
+# Print scatter graph for concentration of apps in each category
+# scatter = px.scatter(df_merged,
+#                      x="App",
+#                      y="Installs",
+#                      color='Installs',
+#                      size='App',
+#                      title="Category Concentration",
+#                      hover_name=df_merged.index)
+# scatter.update_layout(xaxis_title="Number of Apps (Lower=More Concentrated)",
+#                       yaxis_title="Installs",
+#                       yaxis=dict(type='log'))
+#
+# scatter.show()
 
-scatter.show()
+# print(df_apps_clean["Genres"].unique())
 
+# print(f"Count: {df_apps_clean['Genres'].count().sort_values(ascending=False)}")
+# print(f"Value Counts:\n{df_apps_clean['Genres'].value_counts().tail()}")
+
+# For Apps with multiple Genres, split them and create a new list with individual Genres.
+stack = df_apps_clean['Genres'].str.split(";", expand=True).stack()
+# print(stack.count())
+num_genres = stack.value_counts()
+# print(f"Number of Genres: {len(num_genres)}")
+#
+# bar = px.bar(x=num_genres.index[:15],
+#              y=num_genres.values[:15],
+#              title="Top 15 Genres",
+#              color=num_genres.values[:15],
+#              color_continuous_scale="Agsunset"
+#              )
+# bar.update_layout(xaxis_title='Genre',yaxis_title='Number of Apps',coloraxis_showscale=False)
+#
+# bar.show()
+
+print(df_apps_clean["Type"].value_counts())
+
+# Group by Category and then by Type
+df_free_vs_paid = df_apps_clean.groupby(["Category", "Type"], as_index=False).agg({"App": pd.Series.count})
+# print(df_free_vs_paid.shape)
+# print(df_free_vs_paid.info())
+#
+# bar = px.bar(df_free_vs_paid,
+#              x="Category",
+#              y="App",
+#              color="Type",
+#              barmode="group")
+#
+# # Change the display order and a log scale
+# bar.update_xaxes(categoryorder="total descending")
+# bar.update_layout(yaxis=dict(type="log"))
+# bar.show()
+
+# Box Plot
+df_paid_apps = df_apps_clean[df_apps_clean["Type"] == "Paid"]
+box = px.box(df_paid_apps,
+             x="Category",
+             y="Revenue_Estimate",
+             title="How Many Downloads are Paid Apps Giving Up?"
+             )
+box.update_layout(xaxis_title='Category',
+                  yaxis_title='Paid App Ballpark Revenue',
+                  xaxis={'categoryorder':'min ascending'},
+                  yaxis=dict(type='log'))
+box.show()
 
